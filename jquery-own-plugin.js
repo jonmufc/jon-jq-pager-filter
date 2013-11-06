@@ -211,10 +211,11 @@
 		});
     },
 
-    jon_alert: function() {
+	// Not use now
+    //jon_alert: function() {
       // Another method code
 		//alert("something");
-    }
+    //}
 
   });
 })(jQuery);

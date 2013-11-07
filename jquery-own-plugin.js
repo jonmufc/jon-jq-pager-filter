@@ -216,9 +216,5 @@
       // Another method code
 		//alert("something");
     //}
-	// Test2
-<<<<<<< HEAD
-=======
->>>>>>> c7f30a562b0fd7502530635891b76b0b53042bc3
   });
 })(jQuery);

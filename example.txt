@@ -1,0 +1,39 @@
+$cur_page = $_POST["cur_page"];
+		$page_limit=2;
+		
+		$obj_cri = new Criteria();
+		if (isset($_POST["col"])) {
+			$arr_data = $obj_cri->getAllCriteria($obj_db,$cur_page,$page_limit,$_POST["col"],$_POST["q"]);
+			$cnt_data = $obj_cri->getAllCriteriaCount($obj_db,$_POST["col"],$_POST["q"]);
+		} else {
+			$arr_data = $obj_cri->getAllCriteria($obj_db,$cur_page,$page_limit);
+			$cnt_data = $obj_cri->getAllCriteriaCount($obj_db);
+		}
+		
+		//print_r($arr_data);
+		
+		echo "<div>";
+		echo "<script type='text/javascript'>";
+			echo "$('#tbl_view_criteria').jon_pager(".$cur_page.",".$cnt_data.");";
+		echo "</script>";
+			echo "<table border=0 cellspacing=1px cellpadding=7px id='tbl_view_criteria'>";
+				echo "<thead>";
+					echo "<tr><th>CID</th><th>report_type</th><th>criteria_name</th><th>created_date</th><th>active</th></tr>";
+				echo "</thead>";
+				echo "<tbody>";
+					if (count($arr_data) > 0) {
+						foreach ($arr_data as $key=>$value) {
+							echo "<tr>";
+								echo "<td width='10%'>".$value['CID']."</td>";
+								if ($value['report_type']=="1") {
+									echo "<td width='15%'>ISO14001</td>";	
+								}
+								echo "<td width='45%'>".$value['criteria_name']."</td>";
+								echo "<td width='20%'>".$value['created_date']."</td>";
+								echo "<td width='10%'>".$value['active']."</td>";
+							echo "</tr>";
+						}
+					}
+				echo "</tbody>";
+			echo "</table>";
+		echo "</div>";
